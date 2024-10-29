@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pause
+spec:
+  replicas: 12  # This value will be replaced dynamically
+  selector:
+    matchLabels:
+      app: pause
+  template:
+    metadata:
+      labels:
+        app: pause
+    spec:
+      priorityClassName: low-priority
+      containers:
+      - name: pause-container
+        image: registry.k8s.io/pause:latest
+        resources:
+          requests:
+            memory: 8Gi
